@@ -1,4 +1,4 @@
-# mgtoj-frontend
+# sample-oj-frontend
 
 ## Project setup
 ```
@@ -22,3 +22,9 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### 使用OPENAPI-TS自动生成接口文件
+```
+openapi --input http://localhost:8102/api/v2/api-docs --output ./generated --client axios
+```
