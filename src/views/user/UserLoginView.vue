@@ -20,6 +20,11 @@
       <a-form-item>
         <a-button type="primary" html-type="submit" long> 登录 </a-button>
       </a-form-item>
+      <a-form-item>
+        <a-button type="secondary" href="/user/register" long>
+          前往注册
+        </a-button>
+      </a-form-item>
     </a-form>
   </div>
 </template>

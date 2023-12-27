@@ -22,11 +22,17 @@
     </a-col>
     <a-col flex="100px">
       <div>
-        <div v-if="store.state.user?.loginUser">
+        <div v-if="store.state.user?.loginUser.id">
           {{ store.state.user?.loginUser?.userName ?? "已登录" }}
         </div>
         <div v-else>
-          <a href="/user/login">未登录</a>
+          <router-link
+            :to="{ path: '/user/login' }"
+            target="_blank"
+            style="color: red"
+          >
+            点击登录
+          </router-link>
         </div>
       </div>
     </a-col>
