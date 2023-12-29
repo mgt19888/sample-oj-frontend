@@ -8,6 +8,8 @@ import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
+import QuestionView from "@/views/question/QuestionView.vue";
+import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -37,6 +39,19 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/",
+    name: "主页",
+    component: QuestionView,
+    meta: {
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/questions",
+    name: "浏览题目",
+    component: QuestionView,
+  },
+  {
     path: "/add/question",
     name: "创建题目",
     component: AddQuestionView,
@@ -54,20 +69,22 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/view/question/:id",
+    name: "在线做题",
+    component: ViewQuestionView,
+    props: true,
+    meta: {
+      access: ACCESS_ENUM.USER,
+      hideInMenu: true,
+    },
+  },
+  {
     path: "/manage/question",
     name: "管理题目",
     component: ManageQuestionView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
     },
-  },
-  {
-    path: "/",
-    name: "浏览题目",
-    component: HomeView,
-    // meta: {
-    //   access: ACCESS_ENUM.USER,
-    // },
   },
   {
     path: "/hide",
@@ -81,22 +98,25 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/noAuth",
     name: "无权限",
     component: NoAuthView,
-  },
-  {
-    path: "/admin",
-    name: "管理员可见",
-    component: AdminView,
     meta: {
-      access: ACCESS_ENUM.ADMIN,
+      hideInMenu: true,
     },
   },
-  {
-    path: "/about",
-    name: "关于我的",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
+  // {
+  //   path: "/admin",
+  //   name: "管理员可见",
+  //   component: AdminView,
+  //   meta: {
+  //     access: ACCESS_ENUM.ADMIN,
+  //   },
+  // // },
+  // {
+  //   path: "/about",
+  //   name: "关于我的",
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  // },
 ];
