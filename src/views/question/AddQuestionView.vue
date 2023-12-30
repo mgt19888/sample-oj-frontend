@@ -8,7 +8,8 @@
       align-items: center;
     "
   >
-    <h2 style="width: 75%">创建题目</h2>
+    <h2 v-if="updatePage" style="width: 75%">更新题目</h2>
+    <h2 v-else style="width: 75%">创建题目</h2>
     <a-form :model="form" label-align="left" style="width: 75%">
       <a-form-item field="title" label="标题">
         <a-input
