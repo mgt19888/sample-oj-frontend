@@ -53,7 +53,7 @@
         {{ record.judgeInfo.memory }}
       </template>
       <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD hh:mm") }}
+        {{ moment(record.createTime).format("YYYY-MM-DD HH:mm") }}
       </template>
     </a-table>
   </div>

@@ -49,9 +49,8 @@
               placeholder="选择编程语言"
             >
               <a-option>java</a-option>
+              <a-option>c</a-option>
               <a-option>cpp</a-option>
-              <a-option>go</a-option>
-              <a-option>html</a-option>
               <a-option>python</a-option>
             </a-select>
           </a-form-item>
