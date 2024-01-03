@@ -8,7 +8,7 @@
         <a-input-tag v-model="searchParams.tags" placeholder="请输入标签" />
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" @click="doSubmit">提交</a-button>
+        <a-button type="primary" @click="doSubmit">搜索</a-button>
       </a-form-item>
     </a-form>
     <a-divider size="0" />
@@ -34,12 +34,19 @@
       <template #acceptedRate="{ record }">
         {{
           `${
-            record.submitNum ? record.acceptedNum / record.submitNum : "0"
+            record.submitNum
+              ? (record.acceptedNum / record.submitNum) * 100
+              : "0"
           }% (${record.acceptedNum}/${record.submitNum})`
         }}
       </template>
       <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD") }}
+        {{
+          moment(record.createTime)
+            .tz(moment.tz.guess())
+            .subtract(8, "hours") //解决部署服务器后多8小时的问题，如果是本地部署可删除
+            .format("YYYY-MM-DD")
+        }}
       </template>
       <template #optional="{ record }">
         <a-space>
@@ -63,7 +70,11 @@ import {
 import message from "@arco-design/web-vue/es/message";
 import * as querystring from "querystring";
 import { useRouter } from "vue-router";
-import moment from "moment";
+// import moment from "moment";
+import moment from "moment-timezone";
+
+// 设置服务器时区
+moment.tz.setDefault("UTC");
 
 const tableRef = ref();
 

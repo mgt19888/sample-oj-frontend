@@ -27,17 +27,35 @@
         />
       </a-form-item>
       <a-form-item field="content" label="题目内容">
-        <MdEditor :value="form.content" :handle-change="onContentChange" />
+        <MdEditor
+          @click="
+            contentZIndex = 2;
+            answerZIndex = 1;
+          "
+          :style="`z-index: ${contentZIndex}`"
+          mode="split"
+          :value="form.content"
+          :handle-change="onContentChange"
+        />
       </a-form-item>
       <a-form-item field="answer" label="答案">
-        <MdEditor :value="form.answer" :handle-change="onAnswerChange" />
+        <MdEditor
+          @click="
+            contentZIndex = 1;
+            answerZIndex = 2;
+          "
+          :style="`z-index: ${answerZIndex}`"
+          mode="split"
+          :value="form.answer"
+          :handle-change="onAnswerChange"
+        />
       </a-form-item>
       <a-form-item label="判题配置" :content-flex="false" :merge-props="false">
         <a-space direction="vertical" style="min-width: 480px">
           <a-form-item field="judgeConfig.timeLimit" label="时间限制">
             <a-input-number
               v-model="form.judgeConfig.timeLimit"
-              placeholder="请输入时间限制"
+              placeholder="请输入时间限制（MS）"
               mode="button"
               min="0"
               size="large"
@@ -46,7 +64,7 @@
           <a-form-item field="judgeConfig.memoryLimit" label="内存限制">
             <a-input-number
               v-model="form.judgeConfig.memoryLimit"
-              placeholder="请输入内存限制"
+              placeholder="请输入内存限制（KB）"
               mode="button"
               min="0"
               size="large"
@@ -123,6 +141,8 @@ import message from "@arco-design/web-vue/es/message";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+const contentZIndex = ref(1);
+const answerZIndex = ref(1);
 // 如果页面地址包含 update，视为更新页面
 const updatePage = route.path.includes("update");
 

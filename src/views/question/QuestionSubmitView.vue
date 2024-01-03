@@ -50,10 +50,15 @@
         {{ record.judgeInfo.time }}
       </template>
       <template #judgeMemory="{ record }">
-        {{ record.judgeInfo.memory }}
+        {{ parseInt((record.judgeInfo.memory / 1000).toString()) }}
       </template>
       <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD HH:mm") }}
+        {{
+          moment(record.createTime)
+            .tz(moment.tz.guess())
+            .subtract(8, "hours") //解决部署服务器后多8小时的问题，如果是本地部署可删除
+            .format("YYYY-MM-DD HH:mm")
+        }}
       </template>
     </a-table>
   </div>
@@ -68,7 +73,11 @@ import {
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
-import moment from "moment";
+// import moment from "moment";
+import moment from "moment-timezone";
+
+// 设置服务器时区
+moment.tz.setDefault("UTC");
 
 const tableRef = ref();
 
@@ -149,11 +158,11 @@ const columns = [
     slotName: "judgeResult",
   },
   {
-    title: "运行时间（us）",
+    title: "运行时间（MS）",
     slotName: "judgeTime",
   },
   {
-    title: "运行内存",
+    title: "运行内存（KB）",
     slotName: "judgeMemory",
   },
   // {

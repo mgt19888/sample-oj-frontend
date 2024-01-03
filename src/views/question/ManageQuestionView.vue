@@ -26,11 +26,16 @@
         <span>
           <p>时间限制: {{ JSON.parse(record.judgeConfig).timeLimit }}</p>
           <p>内存限制: {{ JSON.parse(record.judgeConfig).memoryLimit }}</p>
-          <p>堆栈限制: {{ JSON.parse(record.judgeConfig).stackLimit }}</p>
+          <!--          <p>堆栈限制: {{ JSON.parse(record.judgeConfig).stackLimit }}</p>-->
         </span>
       </template>
       <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD hh-mm") }}
+        {{
+          moment(record.createTime)
+            .tz(moment.tz.guess())
+            .subtract(8, "hours") //解决部署服务器后多8小时的问题，如果是本地部署可删除
+            .format("YYYY-MM-DD HH:mm")
+        }}
       </template>
       <template #optional="{ record }">
         <a-space>
@@ -52,7 +57,11 @@ import {
 import message from "@arco-design/web-vue/es/message";
 import * as querystring from "querystring";
 import { useRouter } from "vue-router";
-import moment from "moment/moment";
+// import moment from "moment/moment";
+import moment from "moment-timezone";
+
+// 设置服务器时区
+moment.tz.setDefault("UTC");
 
 const tableRef = ref();
 

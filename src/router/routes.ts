@@ -22,17 +22,11 @@ export const routes: Array<RouteRecordRaw> = [
         path: "/user/login",
         name: "用户登录",
         component: UserLoginView,
-        meta: {
-          access: ACCESS_ENUM.NOT_LOGIN,
-        },
       },
       {
         path: "/user/register",
         name: "用户注册",
         component: UserRegisterView,
-        meta: {
-          access: ACCESS_ENUM.NOT_LOGIN,
-        },
       },
     ],
     meta: {
@@ -92,14 +86,14 @@ export const routes: Array<RouteRecordRaw> = [
       access: ACCESS_ENUM.ADMIN,
     },
   },
-  {
-    path: "/hide",
-    name: "隐藏页面",
-    component: HomeView,
-    meta: {
-      hideInMenu: true,
-    },
-  },
+  // {
+  //   path: "/hide",
+  //   name: "隐藏页面",
+  //   component: HomeView,
+  //   meta: {
+  //     hideInMenu: true,
+  //   },
+  // },
   {
     path: "/noAuth",
     name: "无权限",
